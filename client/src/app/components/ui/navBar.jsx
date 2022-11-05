@@ -1,30 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NavProfile from "./navProfile";
+import { useSelector } from "react-redux";
+import { getUsersIsLoggeedIn } from "../../store/users";
 
 const NavBar = () => {
+  const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center bg-light mb-3 navbar">
-        <div className="ms-3 text-black-50">
+      <div className="d-flex justify-content-between align-items-center bg-light  p-3">
+        <div className=" text-black-50">
           <h3>Blog</h3>
         </div>
-        <nav className="">
+        <nav className="navbar">
           <div className="container-fluid">
             <ul className="nav">
-              <li className="nav-item">
+              <li className="nav-item" style={{ margin: "auto 0" }}>
                 <Link className="nav-link" aria-current="page" to="/">
                   Main
                 </Link>
               </li>
+              {isLoggedIn && (
+                <li className="nav-item" style={{ margin: "auto 0" }}>
+                  <Link className="nav-link" aria-current="page" to="/users">
+                    Users
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/user">
-                  User
-                </Link>
+                {isLoggedIn ? (
+                  <NavProfile />
+                ) : (
+                  <Link className="nav-link" aria-current="page" to="/login">
+                    Login
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

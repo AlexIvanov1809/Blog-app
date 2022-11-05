@@ -3,14 +3,20 @@ import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import RadioField from "../common/form/radioFiel";
 import CheckBoxField from "../common/form/checkBoxField";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../store/users";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
     sex: "male",
     name: "",
-    license: false
+    license: false,
+    admin: false
   });
 
   const [errors, setErrors] = useState({});
@@ -34,11 +40,6 @@ const RegisterForm = () => {
       isContainDigit: { message: "Have no digit" },
       min: { message: "Passwort contains min 8 symbols", value: 8 }
     },
-    profession: {
-      isRequired: {
-        message: "Choose your profession"
-      }
-    },
     license: {
       isRequired: {
         message: "You can't use our service with out comfired license agreement"
@@ -56,13 +57,17 @@ const RegisterForm = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const back = () => {
+    navigate("/");
+  };
+
   const isValid = Object.keys(errors).length === 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    console.log(data);
+    dispatch(signUp(data, back));
   };
 
   return (
