@@ -87,11 +87,11 @@ const userUpdateRequasted = createAction("users/userUpdateRequasted");
 export const signIn = (payload, navigate, redirect) => async (dispatch) => {
   const { email, password } = payload;
   dispatch(authRequested());
-  navigate(redirect);
   try {
     const data = await authService.login({ email, password });
     dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageSevice.setTokens(data);
+    navigate(redirect);
   } catch (error) {
     const { code, message } = error.response.data.error;
     if (code === 400) {

@@ -12,39 +12,17 @@ http.interceptors.request.use(
     const expiresDate = localStorageSevice.getExpiresDate();
     const refreshToken = localStorageSevice.getRefreshToken();
     const isExpired = refreshToken && expiresDate < Date.now();
-    if (configFile.isFireBase) {
-      const containSlash = /\/$/gi.test(config.url);
-      config.url =
-        (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
-
-      // Обновление jwt-token после истечение срока годности
-      if (isExpired) {
-        const { data } = await authService.refresh();
-        localStorageSevice.setTokens({
-          refreshToken: data.refresh_token,
-          idToken: data.id_token,
-          expiresIn: data.expires_in,
-          localId: data.user_id
-        });
-      }
-      // подтверждение авторизациии пользователя
-      const accessToken = localStorageSevice.getAccessToken();
-      if (accessToken) {
-        config.params = { ...config.params, auth: accessToken };
-      }
-    } else {
-      if (isExpired) {
-        const { data } = await authService.refresh();
-        localStorageSevice.setTokens(data);
-      }
-      // подтверждение авторизациии пользователя
-      const accessToken = localStorageSevice.getAccessToken();
-      if (accessToken) {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`
-        };
-      }
+    if (isExpired) {
+      const { data } = await authService.refresh();
+      localStorageSevice.setTokens(data);
+    }
+    // подтверждение авторизациии пользователя
+    const accessToken = localStorageSevice.getAccessToken();
+    if (accessToken) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`
+      };
     }
 
     return config;

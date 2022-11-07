@@ -6,16 +6,18 @@ import {
   loadUsersList
 } from "../../../store/users";
 import PropTypes from "prop-types";
+import { loadPostsList } from "../../../store/posts";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   const usersStatusLoading = useSelector(getUsersLoadingStatus());
   useEffect(() => {
+    dispatch(loadPostsList());
     if (isLoggedIn) {
       dispatch(loadUsersList());
     }
-  }, [isLoggedIn]);
+  }, []);
 
   if (usersStatusLoading) return "Loading...";
 

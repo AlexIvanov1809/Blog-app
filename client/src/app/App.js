@@ -2,11 +2,13 @@ import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NavBar from "./components/ui/navBar";
 import Main from "./layouts/main";
-import ProtectedRoutes from "./components/protectedRoute";
+import ProtectedRoutes from "./components/common/protectedRoute";
 import Login from "./layouts/login";
-import Users from "./layouts/users";
 import LogOut from "./layouts/logOut";
 import AppLoader from "./components/ui/hoc/appLoader";
+import AdminPage from "./layouts/adminPage";
+import CreatePost from "./components/pages/createPost";
+import EditPost from "./components/ui/editPost";
 
 const App = () => {
   return (
@@ -16,9 +18,10 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path="/users" element={<Users />} />
-              <Route path="/users/:userId" element={<Users />} />
-              <Route path="/users/:userId/:edit" element={<Users />} />
+              <Route path="/adminPage" element={<AdminPage />} />
+              <Route path="/adminPage/newPost" element={<CreatePost />} />
+              <Route path="/users/:userId" element={<AdminPage />} />
+              <Route path="/adminPage/:postId/edit" element={<EditPost />} />
             </Route>
             <Route path="/:type" element={<Login />} />
             <Route path="/logout" element={<LogOut />} />
