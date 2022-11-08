@@ -1,29 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { editPost, getCurrentPostData } from "../../store/posts";
+import { getCurrentUserId } from "../../store/users";
 import TextAreaField from "../common/form/textAreaField";
 import TextField from "../common/form/textField";
 
 const EditPost = () => {
-  const { postId } = useParams();
+  const { postId, userId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentPost = useSelector(getCurrentPostData(postId));
-  console.log(currentPost);
+  const currentUserId = useSelector(getCurrentUserId());
   const [data, setData] = useState(currentPost);
-
   const handleChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
   const back = () => {
-    navigate("/adminPage");
+    navigate(`/${userId}/adminPage`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editPost(data, back));
   };
+  if (currentPost.userId !== currentUserId) {
+    return <Navigate to={`/${currentUserId}/adminPage`} />;
+  }
   return (
     <div className="container mt-3">
       <div className="card p-3">

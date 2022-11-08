@@ -26,6 +26,9 @@ const NavProfile = () => {
         <Link to={`/users/${currentUser._id}`} className="dropdown-item">
           Profile
         </Link>
+        <Link className="dropdown-item" to={`/${currentUser._id}/adminPage`}>
+          Admin Page
+        </Link>
         <Link to={"logout"} className="dropdown-item">
           Log out
         </Link>

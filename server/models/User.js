@@ -7,7 +7,6 @@ const schema = new Schema(
     password: { type: String },
     image: { type: String },
     sex: { type: String, enum: ["male", "female", "other"] },
-    admin: { type: Boolean },
   },
   {
     timestamps: true,

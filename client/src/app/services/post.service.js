@@ -16,7 +16,6 @@ const postService = {
     return data;
   },
   editPost: async (postId, payLoad) => {
-    console.log(postId);
     const { data } = await httpService.patch(postEndpoint + postId, payLoad);
     return data;
   }

@@ -101,6 +101,11 @@ export const getCurrentPostData = (postId) => (state) => {
 };
 
 export const getPosts = () => (state) => state.posts.entities;
+export const getPostsById = (userId) => (state) => {
+  return state.posts.entities
+    ? state.posts.entities.filter((p) => p.userId === userId)
+    : [];
+};
 
 export const getPostsLoadingStatus = () => (state) => state.posts.isLoading;
 

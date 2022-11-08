@@ -15,8 +15,7 @@ const RegisterForm = () => {
     password: "",
     sex: "male",
     name: "",
-    license: false,
-    admin: false
+    license: false
   });
 
   const [errors, setErrors] = useState({});

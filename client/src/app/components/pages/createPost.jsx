@@ -1,29 +1,33 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../store/posts";
 import TextAreaField from "../common/form/textAreaField";
 import TextField from "../common/form/textField";
 
 const CreatePost = () => {
+  const { userId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState({
     title: "",
     shortText: "",
-    fullText: ""
+    fullText: "",
+    likes: 0,
+    comments: []
   });
 
   const handleChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
   const back = () => {
-    navigate("/adminPage");
+    navigate(`/${userId}/adminPage`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     data.createdAt = Date.now();
+    data.userId = userId;
     dispatch(createPost(data, back));
   };
   return (

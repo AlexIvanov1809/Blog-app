@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AdminPostItem from "../components/ui/adminPostItem";
-import { getPosts } from "../store/posts";
+import { getPosts, getPostsById } from "../store/posts";
 
 const AdminPage = () => {
+  const { userId } = useParams();
   const loadPosts = useSelector(getPosts());
+  const userPosts = useSelector(getPostsById(userId));
   const [posts, setPosts] = useState();
 
   useEffect(() => {
-    setPosts(loadPosts);
+    setPosts(userPosts);
   }, [loadPosts]);
   return (
     <div className="container mt-3">
@@ -18,7 +20,7 @@ const AdminPage = () => {
           <h3>Posts</h3>
         </div>
         <div className="text-end">
-          <Link className="btn btn-primary" to={"/adminPage/newPost"}>
+          <Link className="btn btn-primary" to={`/${userId}/adminPage/newPost`}>
             Create post
           </Link>
         </div>
