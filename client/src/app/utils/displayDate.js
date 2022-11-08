@@ -1,5 +1,6 @@
 export function displayDate(data) {
   const date = new Date(data);
+
   const dateNow = new Date();
   const yearDif = dateNow.getFullYear() - date.getFullYear();
   if (yearDif === 0) {
@@ -16,14 +17,16 @@ export function displayDate(data) {
         }
         return "30 минут назад";
       }
-      return `${date.getHours()}:${date.getMinutes()}`;
+      return `${date.getHours()}:${
+        `${date.getMinutes()}`.split("").length > 1
+          ? date.getMinutes()
+          : `0${date.getMinutes()}`
+      }`;
     }
 
     return `${date.getDate()} ${date.toLocaleString("default", {
       month: "long"
     })}`;
   }
-  return (
-    date.getFullYear() + "." + (date.getMonth() + 1) + "_" + date.getDate()
-  );
+  return date.getFullYear() + "." + (date.getMonth() + 1) + "_" + date.getDay();
 }

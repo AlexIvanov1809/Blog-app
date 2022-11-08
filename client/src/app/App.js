@@ -6,10 +6,11 @@ import ProtectedRoutes from "./components/common/protectedRoute";
 import Login from "./layouts/login";
 import LogOut from "./layouts/logOut";
 import AppLoader from "./components/ui/hoc/appLoader";
-import AdminPage from "./layouts/adminPage";
-import CreatePost from "./components/pages/createPost";
+import AdminPage from "./components/pages/adminPage";
+import CreatePost from "./components/common/createPost";
 import EditPost from "./components/ui/editPost";
 import Posts from "./layouts/posts";
+import UserPost from "./components/pages/userPost";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
                 element={<EditPost />}
               />
             </Route>
+            <Route path="/:postId" element={<UserPost />} />
             <Route path="/:type" element={<Login />} />
             <Route path="/logout" element={<LogOut />} />
             <Route path="/" exact element={<Main />} />

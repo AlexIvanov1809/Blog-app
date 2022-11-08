@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../store/posts";
-import TextAreaField from "../common/form/textAreaField";
-import TextField from "../common/form/textField";
+import TextAreaField from "./form/textAreaField";
+import TextField from "./form/textField";
 
 const CreatePost = () => {
   const { userId } = useParams();
@@ -26,7 +26,6 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    data.createdAt = Date.now();
     data.userId = userId;
     dispatch(createPost(data, back));
   };

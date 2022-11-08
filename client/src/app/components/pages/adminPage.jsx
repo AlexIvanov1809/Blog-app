@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import AdminPostItem from "../components/ui/adminPostItem";
-import { getPosts, getPostsById } from "../store/posts";
+import AdminPostItem from "../ui/adminPostItem";
+import { getPosts, getPostsById } from "../../store/posts";
 
 const AdminPage = () => {
   const { userId } = useParams();
