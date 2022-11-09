@@ -1,6 +1,15 @@
 export function displayDate(data) {
   const date = new Date(data);
-
+  const timeOptions = {
+    hour: "2-digit",
+    minute: "2-digit"
+  };
+  const dateOptions = {
+    day: "numeric",
+    month: "long"
+  };
+  const RUDate = new Intl.DateTimeFormat("ru", dateOptions);
+  const RUTime = new Intl.DateTimeFormat("ru", timeOptions);
   const dateNow = new Date();
   const yearDif = dateNow.getFullYear() - date.getFullYear();
   if (yearDif === 0) {
@@ -17,16 +26,10 @@ export function displayDate(data) {
         }
         return "30 минут назад";
       }
-      return `${date.getHours()}:${
-        `${date.getMinutes()}`.split("").length > 1
-          ? date.getMinutes()
-          : `0${date.getMinutes()}`
-      }`;
+      return `${RUTime.format(date)}`;
     }
 
-    return `${date.getDate()} ${date.toLocaleString("default", {
-      month: "long"
-    })}`;
+    return `${RUDate.format(date)}`;
   }
   return date.getFullYear() + "." + (date.getMonth() + 1) + "_" + date.getDay();
 }

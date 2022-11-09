@@ -4,12 +4,12 @@ const schema = new Schema(
   {
     content: { type: String, required: true },
     // На чьей странице находится комментарий
-    pageId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    postId: { type: Schema.Types.ObjectId, ref: "Post", required: true },
     // Кто оставил коммент
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   {
-    timestamps: { createdAt: "created_at" },
+    timestamps: true,
   }
 );
 

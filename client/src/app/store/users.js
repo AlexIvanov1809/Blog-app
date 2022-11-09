@@ -34,7 +34,7 @@ const usersSlice = createSlice({
       state.dataLoaded = true;
       state.isLoading = false;
     },
-    usersRequestFiled: (state, action) => {
+    usersRequestFeiled: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -73,7 +73,7 @@ const { reducer: usersReducer, actions } = usersSlice;
 const {
   usersRequested,
   usersReceved,
-  usersRequsetFiled,
+  usersRequestFeiled,
   authRequestSuccess,
   authRequestFailed,
   userUpdateSuccssed,
@@ -137,7 +137,7 @@ export const loadUsersList = () => async (dispatch) => {
     const { content } = await userService.get();
     dispatch(usersReceved(content));
   } catch (error) {
-    dispatch(usersRequsetFiled(error.message));
+    dispatch(usersRequestFeiled(error.message));
   }
 };
 

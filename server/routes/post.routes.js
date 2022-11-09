@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../middleware/auth.middleware");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const router = express.Router({ mergeParams: true });
 
 router
@@ -46,8 +47,10 @@ router.delete("/:postId", auth, async (req, res) => {
   try {
     const { postId } = req.params;
     const removedPost = await Post.findById(postId);
+    const list = await Comment.find({ ["postId"]: postId });
 
     await removedPost.remove();
+    list.forEach(async (i) => await i.remove());
     return res.send(null);
   } catch (error) {
     res.status(500).json({

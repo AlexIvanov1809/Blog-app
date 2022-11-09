@@ -31,7 +31,7 @@ const App = () => {
                 element={<EditPost />}
               />
             </Route>
-            <Route path="/:postId" element={<UserPost />} />
+            <Route path="/posts/:postId" element={<UserPost />} />
             <Route path="/:type" element={<Login />} />
             <Route path="/logout" element={<LogOut />} />
             <Route path="/" exact element={<Main />} />

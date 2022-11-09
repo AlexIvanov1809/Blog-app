@@ -9,7 +9,7 @@ const Post = ({ post }) => {
   let like;
   const handleClick = () => {
     if (!like) {
-      navigate(`/${post._id}`);
+      navigate(`/posts/${post._id}`);
     } else {
       like = false;
     }

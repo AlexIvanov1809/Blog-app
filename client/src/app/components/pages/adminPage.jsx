@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import AdminPostItem from "../ui/adminPostItem";
-import { getPosts, getPostsById } from "../../store/posts";
+import { getPosts, getPostsByUserId } from "../../store/posts";
 
 const AdminPage = () => {
   const { userId } = useParams();
   const loadPosts = useSelector(getPosts());
-  const userPosts = useSelector(getPostsById(userId));
+  const userPosts = useSelector(getPostsByUserId(userId));
   const [posts, setPosts] = useState();
-
   useEffect(() => {
     setPosts(userPosts);
   }, [loadPosts]);

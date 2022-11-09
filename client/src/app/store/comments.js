@@ -43,10 +43,10 @@ const {
 
 const addCommentRequested = createAction("comments/addCommentRequested");
 
-export const loadCommentsList = (userId) => async (dispatch) => {
+export const loadCommentsList = (postId) => async (dispatch) => {
   dispatch(commentsRequested());
   try {
-    const { content } = await commentService.getComments(userId);
+    const { content } = await commentService.getComments(postId);
     dispatch(commentsReceved(content));
   } catch (error) {
     dispatch(commentsRequsetFiled(error.message));

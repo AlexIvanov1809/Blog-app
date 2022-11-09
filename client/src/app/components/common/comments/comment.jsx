@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getCurrentUserId, getUsersByIds } from "../../../store/users";
 const Comment = ({
   content,
-  created_at: created,
+  createdAt: created,
   _id: id,
   userId,
   onRemove
@@ -52,7 +52,7 @@ const Comment = ({
 Comment.propTypes = {
   content: PropTypes.string,
   edited_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  created_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  createdAt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userId: PropTypes.string,
   onRemove: PropTypes.func,
   _id: PropTypes.string
