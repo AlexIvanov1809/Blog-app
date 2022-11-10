@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../middleware/auth.middleware");
 const Post = require("../models/Post");
+const Like = require("../models/Like");
 const Comment = require("../models/Comment");
 const router = express.Router({ mergeParams: true });
 
@@ -21,6 +22,7 @@ router
       const newPost = await Post.create({
         ...req.body,
       });
+      await Like.create({ postId: newPost._id, userId: [] });
       res.status(201).send(newPost);
     } catch (error) {
       res.status(500).json({
@@ -47,10 +49,12 @@ router.delete("/:postId", auth, async (req, res) => {
   try {
     const { postId } = req.params;
     const removedPost = await Post.findById(postId);
-    const list = await Comment.find({ ["postId"]: postId });
+    const commentList = await Comment.find({ ["postId"]: postId });
+    const likes = await Like.find({ ["postId"]: postId });
 
     await removedPost.remove();
-    list.forEach(async (i) => await i.remove());
+    commentList.forEach(async (i) => await i.remove());
+    likes[0].remove();
     return res.send(null);
   } catch (error) {
     res.status(500).json({

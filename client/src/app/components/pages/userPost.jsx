@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { editLike, getlikesByPostId } from "../../store/likes";
 import { getPostsById, getPostsLoadingStatus } from "../../store/posts";
-import { getUsersIsLoggeedIn } from "../../store/users";
+import { getCurrentUserId, getUsersIsLoggeedIn } from "../../store/users";
 import { displayDate } from "../../utils/displayDate";
 import Comments from "../ui/comments";
 
 const UserPost = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const post = useSelector(getPostsById(postId))[0];
-  const isLoading = useSelector(getPostsLoadingStatus());
+  const likes = useSelector(getlikesByPostId(postId))[0];
+  const currentUserId = useSelector(getCurrentUserId());
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
+  const isLoading = useSelector(getPostsLoadingStatus());
   const [date, setDate] = useState();
-  console.log(post);
   useEffect(() => {
     if (!isLoading) {
       setDate(displayDate(post?.createdAt));
@@ -21,7 +24,9 @@ const UserPost = () => {
   }, [isLoading]);
 
   const handleChange = () => {
-    console.log("click");
+    if (isLoggedIn) {
+      dispatch(editLike(likes._id, { userId: currentUserId }));
+    }
   };
   return (
     <div className="container">
@@ -37,10 +42,14 @@ const UserPost = () => {
                   role="button"
                   onClick={handleChange}
                 >
-                  <i className="bi bi-hand-thumbs-up"></i> {post.likes}
-                </span>
-                <span className="text-muted">
-                  Comments: {post?.comments?.length}
+                  <i
+                    className={`bi bi-hand-thumbs-up${
+                      likes.userId.findIndex((u) => u === currentUserId) === -1
+                        ? ""
+                        : "-fill"
+                    }`}
+                  ></i>{" "}
+                  {likes.userId.length}
                 </span>
               </div>
               <div className="text-end text-muted">
@@ -60,7 +69,7 @@ const UserPost = () => {
           Back
         </button>
       </div>
-      {isLoggedIn && <Comments />}
+      <Comments />
     </div>
   );
 };

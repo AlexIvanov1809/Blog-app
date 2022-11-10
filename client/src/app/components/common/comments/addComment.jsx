@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TextAreaField from "../../common/form/textAreaField";
 import { validator } from "../../../utils/validator";
+import { useSelector } from "react-redux";
+import { getCurrentUserId } from "../../../store/users";
 
 const AddComment = ({ onSubmit }) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ content: "" });
   const [errors, setErrors] = useState({});
+  const currentUserId = useSelector(getCurrentUserId());
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
@@ -27,13 +30,14 @@ const AddComment = ({ onSubmit }) => {
   };
 
   const clearForm = () => {
-    setData({});
+    setData({ content: "" });
     setErrors({});
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
+    data.userId = currentUserId;
     onSubmit(data);
     clearForm();
   };

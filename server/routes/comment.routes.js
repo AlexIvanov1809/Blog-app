@@ -7,7 +7,7 @@ const router = express.Router({ mergeParams: true });
 // /api/comments если одинаковые пути то можно так
 router
   .route("/")
-  .get(auth, async (req, res) => {
+  .get(async (req, res) => {
     try {
       const { orderBy, equalTo } = req.query;
       const list = await Comment.find({ [orderBy]: equalTo });

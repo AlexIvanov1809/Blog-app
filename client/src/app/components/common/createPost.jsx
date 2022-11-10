@@ -27,6 +27,7 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     data.userId = userId;
+    data.createdAt = Date.now();
     dispatch(createPost(data, back));
   };
   return (

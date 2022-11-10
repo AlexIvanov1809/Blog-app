@@ -2,21 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import { displayDate } from "../../utils/displayDate";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUserId, getUsersIsLoggeedIn } from "../../store/users";
+import { editLike } from "../../store/likes";
 
-const Post = ({ post }) => {
+const Post = ({ post, like }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const date = displayDate(post.createdAt);
-  let like;
+  const isLoggedIn = useSelector(getUsersIsLoggeedIn());
+  const currentUserId = useSelector(getCurrentUserId());
+
+  let likes;
   const handleClick = () => {
-    if (!like) {
+    if (!likes) {
       navigate(`/posts/${post._id}`);
     } else {
-      like = false;
+      likes = false;
     }
   };
 
   const handleChange = () => {
-    like = true;
+    likes = true;
+    if (isLoggedIn) {
+      dispatch(editLike(like._id, { userId: currentUserId }));
+    }
   };
   return (
     <div
@@ -34,9 +44,15 @@ const Post = ({ post }) => {
               className="text-muted me-2 like"
               role="button"
               onClick={handleChange}
-              style={{ zIndex: "9999" }}
             >
-              <i className="bi bi-hand-thumbs-up"></i> {post.likes}
+              <i
+                className={`bi bi-hand-thumbs-up${
+                  like.userId.findIndex((u) => u === currentUserId) === -1
+                    ? ""
+                    : "-fill"
+                }`}
+              ></i>{" "}
+              {like.userId.length}
             </span>
             <span className="text-muted">Comments: {post.comments.length}</span>
           </div>
@@ -52,6 +68,7 @@ const Post = ({ post }) => {
 };
 
 Post.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  like: PropTypes.object.isRequired
 };
 export default Post;

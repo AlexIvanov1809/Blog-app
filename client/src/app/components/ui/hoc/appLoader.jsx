@@ -1,24 +1,19 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getUsersIsLoggeedIn,
-  getUsersLoadingStatus,
-  loadUsersList
-} from "../../../store/users";
+import { getUsersLoadingStatus, loadUsersList } from "../../../store/users";
 import PropTypes from "prop-types";
 import { loadPostsList } from "../../../store/posts";
+import { loadLikesList } from "../../../store/likes";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   const usersStatusLoading = useSelector(getUsersLoadingStatus());
-  dispatch(loadPostsList());
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(loadUsersList());
-    }
-  }, [isLoggedIn]);
+    dispatch(loadLikesList());
+    dispatch(loadPostsList());
+    dispatch(loadUsersList());
+  }, []);
 
   if (usersStatusLoading) return "Loading...";
 
