@@ -13,7 +13,7 @@ http.interceptors.request.use(
     const refreshToken = localStorageSevice.getRefreshToken();
     const isExpired = refreshToken && expiresDate < Date.now();
     if (isExpired) {
-      const { data } = await authService.refresh();
+      const data = await authService.refresh();
       localStorageSevice.setTokens(data);
     }
     // подтверждение авторизациии пользователя

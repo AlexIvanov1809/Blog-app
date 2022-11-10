@@ -15,7 +15,7 @@ const Main = () => {
   }, [loadPosts, loadLikes]);
   return (
     <div className="container">
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-center">
         {posts &&
           posts.map((post) => (
             <Post
