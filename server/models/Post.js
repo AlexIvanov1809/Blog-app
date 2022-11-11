@@ -5,7 +5,6 @@ const schema = new Schema(
     title: { type: String, required: true },
     shortText: { type: String, required: true },
     fullText: { type: String, required: true },
-    likes: { type: Number, required: true },
     createdAt: { type: Number, required: true },
     comments: { type: Array, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },

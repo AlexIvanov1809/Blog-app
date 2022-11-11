@@ -12,7 +12,13 @@ const LogOut = () => {
   useEffect(() => {
     dispatch(logOut(back));
   }, []);
-  return <h1>Loading...</h1>;
+  return (
+    <div className="d-flex justify-content-center align-items-center">
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Загрузка...</span>
+      </div>
+    </div>
+  );
 };
 
 export default LogOut;

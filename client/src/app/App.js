@@ -6,11 +6,11 @@ import ProtectedRoutes from "./components/common/protectedRoute";
 import Login from "./layouts/login";
 import LogOut from "./layouts/logOut";
 import AppLoader from "./components/ui/hoc/appLoader";
-import AdminPage from "./components/pages/adminPage";
-import CreatePost from "./components/common/createPost";
+import CreatePost from "./components/ui/createPost";
 import EditPost from "./components/ui/editPost";
 import Posts from "./layouts/posts";
 import UserPost from "./components/pages/userPost";
+import EditUserPage from "./components/ui/editUserPage";
 
 const App = () => {
   return (
@@ -20,14 +20,11 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path="/:userId/adminPage" element={<Posts />} />
+              <Route path="/users/:userId" element={<Posts />} />
+              <Route path="/users/:userId/edit" element={<EditUserPage />} />
+              <Route path="/users/:userId/newPost" element={<CreatePost />} />
               <Route
-                path="/:userId/adminPage/newPost"
-                element={<CreatePost />}
-              />
-              <Route path="/users/:userId" element={<AdminPage />} />
-              <Route
-                path="/:userId/adminPage/:postId/edit"
+                path="/users/:userId/:postId/edit"
                 element={<EditPost />}
               />
             </Route>

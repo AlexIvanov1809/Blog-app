@@ -51,7 +51,11 @@ const Comments = () => {
           onRemove={handleRemoveComment}
         />
       ) : (
-        "Loading..."
+        <div className="d-flex justify-content-center align-items-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Загрузка...</span>
+          </div>
+        </div>
       )}
     </>
   );

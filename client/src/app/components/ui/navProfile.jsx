@@ -9,7 +9,15 @@ const NavProfile = () => {
   const toggleMenu = () => {
     setOpen((prevState) => !prevState);
   };
-  if (!currentUser) return "Loading...";
+  if (!currentUser) {
+    return (
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Загрузка...</span>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="dropdown" onClick={toggleMenu}>
       <div className="btn dropdown-toggle d-flex align-items-center">
@@ -25,9 +33,6 @@ const NavProfile = () => {
       <div className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}>
         <Link to={`/users/${currentUser._id}`} className="dropdown-item">
           Profile
-        </Link>
-        <Link className="dropdown-item" to={`/${currentUser._id}/adminPage`}>
-          Admin Page
         </Link>
         <Link to={"logout"} className="dropdown-item">
           Log out

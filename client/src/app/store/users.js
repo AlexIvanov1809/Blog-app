@@ -121,11 +121,12 @@ export const logOut = (navigate) => (dispatch) => {
   navigate();
 };
 
-export const editUser = (payload) => async (dispatch) => {
+export const editUser = (payload, navigate) => async (dispatch) => {
   dispatch(userUpdateRequasted());
   try {
     const { content } = await userService.edit(payload);
     dispatch(userUpdateSuccssed(content));
+    navigate();
   } catch (error) {
     dispatch(userUpdateFaild(error.message));
   }

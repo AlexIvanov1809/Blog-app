@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { loadLikesList } from "../../store/likes";
 import { createPost } from "../../store/posts";
-import TextAreaField from "./form/textAreaField";
-import TextField from "./form/textField";
+import { getCurrentUserId } from "../../store/users";
+import TextAreaField from "../common/form/textAreaField";
+import TextField from "../common/form/textField";
 
 const CreatePost = () => {
   const { userId } = useParams();
+  const currentUserId = useSelector(getCurrentUserId());
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState({
     title: "",
     shortText: "",
     fullText: "",
-    likes: 0,
     comments: []
   });
 
@@ -21,15 +23,19 @@ const CreatePost = () => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
   const back = () => {
-    navigate(`/${userId}/adminPage`);
+    navigate(`/users/${userId}`);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     data.userId = userId;
     data.createdAt = Date.now();
-    dispatch(createPost(data, back));
+    await dispatch(createPost(data, back));
+    dispatch(loadLikesList());
   };
+  if (userId !== currentUserId) {
+    return <Navigate to={`/users/${currentUserId}/newPost`} />;
+  }
   return (
     <div className="container mt-3">
       <div className="card p-3">

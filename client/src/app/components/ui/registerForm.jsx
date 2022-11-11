@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
-import RadioField from "../common/form/radioFiel";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/users";
@@ -13,7 +12,6 @@ const RegisterForm = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
-    sex: "male",
     name: "",
     license: false
   });
@@ -92,17 +90,6 @@ const RegisterForm = () => {
         value={data.password}
         onChange={handleChange}
         error={errors.password}
-      />
-      <RadioField
-        label="Выберите ваш пол"
-        options={[
-          { name: "Male", value: "male" },
-          { name: "Female", value: "female" },
-          { name: "Other", value: "other" }
-        ]}
-        value={data.sex}
-        name="sex"
-        onChange={handleChange}
       />
       <CheckBoxField
         name="license"

@@ -12,7 +12,7 @@ const Posts = () => {
       {userId === currentUserId ? (
         <AdminPage />
       ) : (
-        <Navigate to={`/${currentUserId}/adminPage`} />
+        <Navigate to={`/users/${currentUserId}`} />
       )}
     </>
   );

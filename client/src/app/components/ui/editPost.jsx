@@ -17,7 +17,7 @@ const EditPost = () => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
   const back = () => {
-    navigate(`/${userId}/adminPage`);
+    navigate(`/users/${userId}`);
   };
 
   const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ const EditPost = () => {
     dispatch(editPost(data, back));
   };
   if (currentPost.userId !== currentUserId) {
-    return <Navigate to={`/${currentUserId}/adminPage`} />;
+    return <Navigate to={`/users/${currentUserId}`} />;
   }
   return (
     <div className="container mt-3">

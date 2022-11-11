@@ -17,12 +17,12 @@ const AdminPostItem = ({ post }) => {
       <div>
         <Link
           className="btn btn-white"
-          to={`/${userId}/adminPage/${post._id}/edit`}
+          to={`/users/${userId}/${post._id}/edit`}
         >
-          edit
+          <i className="bi bi-pencil"></i>
         </Link>
         <button className="btn btn-white" onClick={() => handleClick(post._id)}>
-          delete
+          <i className="bi bi-trash text-danger"></i>
         </button>
       </div>
     </div>
