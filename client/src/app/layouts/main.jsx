@@ -43,7 +43,7 @@ const Main = () => {
   }
   const searchedPosts = searchPost(posts);
   const sortedPostsByNewest =
-    searchedPosts.length > 0 ? [...searchedPosts].reverse() : searchedPosts;
+    searchedPosts?.length > 0 ? [...searchedPosts].reverse() : searchedPosts;
   const postCrop = paginate(sortedPostsByNewest, currentPage, pageSize);
   return (
     <>
@@ -60,14 +60,16 @@ const Main = () => {
               value={searchQuery}
             />
           </div>
-          <div className="d-flex flex-wrap justify-content-center mt-2">
-            {postCrop.map((post) => (
-              <Post
-                key={post._id}
-                post={post}
-                like={likes.filter((l) => post._id === l.postId)[0]}
-              />
-            ))}
+          <div className="">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-2 justify-content-center">
+              {postCrop.map((post) => (
+                <Post
+                  key={post._id}
+                  post={post}
+                  like={likes.filter((l) => post._id === l.postId)[0]}
+                />
+              ))}
+            </div>
           </div>
           <div className="d-flex justify-content-center">
             <Pagination

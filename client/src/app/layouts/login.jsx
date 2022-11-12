@@ -1,19 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/common/backButton";
 import LoginForm from "../components/ui/loginForm";
 import RegisterForm from "../components/ui/registerForm";
+import { removeAuthError } from "../store/users";
 
 const Login = () => {
   const { type } = useParams();
+  const dispatch = useDispatch();
   const [formType, setFormType] = useState(
     type === "register" ? type : "login"
   );
-
+  const refreshErrors = () => {
+    dispatch(removeAuthError());
+  };
   const toggleFormeType = () => {
     setFormType((prevState) =>
       prevState === "register" ? "login" : "register"
     );
+    refreshErrors();
   };
 
   return (

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
-import { useDispatch } from "react-redux";
-import { signUp } from "../../store/users";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthError, signUp } from "../../store/users";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
@@ -15,8 +15,8 @@ const RegisterForm = () => {
     name: "",
     license: false
   });
-
   const [errors, setErrors] = useState({});
+  const loginError = useSelector(getAuthError());
 
   const handleChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
@@ -99,6 +99,9 @@ const RegisterForm = () => {
       >
         Confirm <a>licence agreement</a>
       </CheckBoxField>
+      {loginError?.type === "reg" && (
+        <p className="text-danger">{loginError.message}</p>
+      )}
       <button
         className="btn btn-primary w-100 mx-auto"
         type="submit"

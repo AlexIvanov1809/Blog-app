@@ -35,7 +35,7 @@ const Post = ({ post, like }) => {
   };
   return (
     <div
-      className="card m-2 text-decoration-none text-black"
+      className="card col m-2 text-decoration-none text-black"
       style={{ width: "300px" }}
       role="button"
       onClick={handleClick}

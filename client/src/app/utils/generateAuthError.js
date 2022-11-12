@@ -1,15 +1,14 @@
 function generateAuthError(message) {
   switch (message) {
     case "EMAIL_NOT_FOUND":
-      return "e-mail or password is uncorrect";
+      return { message: "e-mail or password is uncorrect", type: "login" };
 
     case "INVALID_PASSWORD":
-      return "e-mail or password is uncorrect";
+      return { message: "e-mail or password is uncorrect", type: "login" };
     case "EMAIL_EXISTS":
-      return "The e-mail is exist";
-
+      return { message: "The e-mail is exist", type: "reg" };
     default:
-      return "too many attempts, try later";
+      return { message: "too many attempts, try later", type: "login" };
   }
 }
 export default generateAuthError;

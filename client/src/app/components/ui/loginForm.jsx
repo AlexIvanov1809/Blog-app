@@ -70,7 +70,9 @@ const LoginForm = () => {
       <CheckBoxField name="stayOn" value={data.stayOn} onChange={handleChange}>
         Stay in system
       </CheckBoxField>
-      {loginError && <p className="text-danger">{loginError}</p>}
+      {loginError?.type === "login" && (
+        <p className="text-danger">{loginError.message}</p>
+      )}
       <button
         className="btn btn-primary w-100 mx-auto"
         type="submit"
