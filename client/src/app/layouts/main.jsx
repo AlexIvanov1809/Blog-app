@@ -10,25 +10,57 @@ const Main = () => {
   const loadPosts = useSelector(getPosts());
   const loadLikes = useSelector(getlikes());
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState();
+  const pageSize = 4;
+
   useEffect(() => {
     setPosts(loadPosts);
     setLikes(loadLikes);
   }, [loadPosts, loadLikes]);
 
-  const pageSize = 4;
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  const handleSearchQuery = ({ target }) => {
+    setSearchQuery(target.value);
+  };
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
   };
 
-  const postCrop = paginate(posts, currentPage, pageSize);
+  function searchPost(data) {
+    const searchedPosts = searchQuery
+      ? data.filter(
+          (post) =>
+            post.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+        )
+      : data;
+    return searchedPosts;
+  }
+  const searchedPosts = searchPost(posts);
+  const sortedPostsByNewest =
+    searchedPosts.length > 0 ? [...searchedPosts].reverse() : searchedPosts;
+  const postCrop = paginate(sortedPostsByNewest, currentPage, pageSize);
   return (
     <>
       {posts && likes ? (
         <div className="container">
-          <div className="d-flex flex-wrap align-items-start justify-content-center mt-2">
+          <div className="mt-2">
+            <input
+              className="form-control m-auto"
+              style={{ width: "320px" }}
+              type="text"
+              name="searchQuery"
+              placeholder="Search..."
+              onChange={handleSearchQuery}
+              value={searchQuery}
+            />
+          </div>
+          <div className="d-flex flex-wrap justify-content-center mt-2">
             {postCrop.map((post) => (
               <Post
                 key={post._id}
@@ -39,7 +71,7 @@ const Main = () => {
           </div>
           <div className="d-flex justify-content-center">
             <Pagination
-              itemsCount={posts.length}
+              itemsCount={searchedPosts.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={handlePageChange}

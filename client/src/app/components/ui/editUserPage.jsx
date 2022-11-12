@@ -7,6 +7,7 @@ import {
   getCurrentUserId
 } from "../../store/users";
 import { validator } from "../../utils/validator";
+import BackButton from "../common/backButton";
 import TextField from "../common/form/textField";
 
 const EditUserPage = () => {
@@ -15,7 +16,7 @@ const EditUserPage = () => {
   const navigate = useNavigate();
   const currentUserId = useSelector(getCurrentUserId());
   const user = useSelector(getCurrentUserData());
-  const [data, setData] = useState();
+  const [data, setData] = useState({ email: "", name: "" });
   const [errors, setErrors] = useState({});
 
   const handleChange = (target) => {
@@ -62,20 +63,21 @@ const EditUserPage = () => {
   }
   return (
     <div className="container">
+      <BackButton />
       <div className="card p-2 m-auto mt-4" style={{ width: "320px" }}>
         <h4>Edit User</h4>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Электронная почта"
             name="email"
-            value={data?.email}
+            value={data.email}
             onChange={handleChange}
             error={errors.email}
           />
           <TextField
             label="Имя"
             name="name"
-            value={data?.name}
+            value={data.name}
             onChange={handleChange}
             error={errors.name}
           />

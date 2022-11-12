@@ -5,6 +5,7 @@ import AdminPostItem from "../ui/adminPostItem";
 import { getPosts, getPostsByUserId } from "../../store/posts";
 import UserBio from "../ui/userBio";
 import { getCurrentUserData } from "../../store/users";
+import BackButton from "../common/backButton";
 
 const AdminPage = () => {
   const { userId } = useParams();
@@ -17,6 +18,7 @@ const AdminPage = () => {
   }, [loadPosts]);
   return (
     <div className="container mt-3">
+      <BackButton />
       <UserBio id={_id} name={name} image={image} />
       <div className="d-flex justify-content-between">
         <div className="w-100 d-flex justify-content-between align-items-center">
@@ -34,7 +36,7 @@ const AdminPage = () => {
         </div>
       </div>
       <hr />
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap justify-content-center">
         {posts &&
           posts.map((item) => (
             <div

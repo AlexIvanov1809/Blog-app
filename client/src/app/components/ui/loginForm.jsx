@@ -47,7 +47,7 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = validate();
-    if (!isValid) return console.log(data);
+    if (!isValid) return;
     dispatch(signIn(data, back, redirect));
   };
   return (

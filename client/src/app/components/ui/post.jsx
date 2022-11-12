@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { displayDate } from "../../utils/displayDate";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUserId, getUsersIsLoggeedIn } from "../../store/users";
+import {
+  getCurrentUserId,
+  getUsersByIds,
+  getUsersIsLoggeedIn
+} from "../../store/users";
 import { editLike } from "../../store/likes";
 
 const Post = ({ post, like }) => {
@@ -12,7 +16,8 @@ const Post = ({ post, like }) => {
   const date = displayDate(post.createdAt);
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   const currentUserId = useSelector(getCurrentUserId());
-
+  const postMaker = useSelector(getUsersByIds(post.userId));
+  const name = postMaker.name.split(" ")[0];
   let likes;
   const handleClick = () => {
     if (!likes) {
@@ -35,9 +40,23 @@ const Post = ({ post, like }) => {
       role="button"
       onClick={handleClick}
     >
-      <div className="card-body">
-        <h4 className="card-title">{post.title}</h4>
-        <p className="card-text mb-2 ">{post.shortText}</p>
+      <div className="card-body d-flex flex-column justify-content-between">
+        <div>
+          <div className="d-flex justify-content-between">
+            <h4 className="card-title">{post.title}</h4>
+            <div className="text-center ms-2">
+              <img
+                src={postMaker.image}
+                alt=""
+                className="img-responsive rounded-circle"
+                width="30"
+                height="30"
+              />
+              <div style={{ fontSize: "12px" }}>{name}</div>
+            </div>
+          </div>
+          <p className="card-text mb-2 ">{post.shortText}</p>
+        </div>
         <div className="d-flex justify-content-between">
           <div>
             <span
@@ -54,7 +73,9 @@ const Post = ({ post, like }) => {
               ></i>{" "}
               {like.userId.length}
             </span>
-            <span className="text-muted">Comments: {post.comments.length}</span>
+            <span className="text-muted ms-2">
+              <i className="bi bi-chat-left-text"></i> {post.comments.length}
+            </span>
           </div>
           <div className="text-end text-muted">
             <span className="text-end text-muted" style={{ fontSize: "11px" }}>

@@ -6,7 +6,10 @@ export function displayDate(data) {
   };
   const dateOptions = {
     day: "numeric",
-    month: "long"
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
   };
   const RUDate = new Intl.DateTimeFormat("ru", dateOptions);
   const RUTime = new Intl.DateTimeFormat("ru", timeOptions);

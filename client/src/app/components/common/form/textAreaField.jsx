@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextAreaField = ({ label, name, value, onChange, error, rows = "3" }) => {
+const TextAreaField = ({
+  label,
+  name,
+  value,
+  onChange,
+  maxLength,
+  error,
+  rows = "3"
+}) => {
+  const [textLength, setTextLength] = useState(value);
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value });
+    setTextLength(target.value);
   };
   const getInputClasses = () => {
     return "form-control" + (error ? " is-invalid" : "");
@@ -19,11 +29,19 @@ const TextAreaField = ({ label, name, value, onChange, error, rows = "3" }) => {
           value={value}
           onChange={handleChange}
           className={getInputClasses()}
+          maxLength={maxLength}
           rows={rows}
         />
 
         {error && <div className="invalid-feedback ">{error}</div>}
       </div>
+      {maxLength ? (
+        <label style={{ fontSize: "12px" }}>
+          {textLength.length}/{maxLength} максимальное количество символов
+        </label>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
@@ -36,6 +54,7 @@ TextAreaField.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   rows: PropTypes.string,
+  maxLength: PropTypes.number,
   onChange: PropTypes.func,
   error: PropTypes.string
 };

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ label, type, name, value, onChange, error }) => {
+const TextField = ({
+  label,
+  type,
+  name,
+  value,
+  onChange,
+  error,
+  maxLength
+}) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [textLength, setTextLength] = useState(value);
 
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value });
+    setTextLength(target.value);
   };
 
   const getInputClasses = () => {
@@ -26,6 +36,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
           id={name}
           value={value}
           onChange={handleChange}
+          maxLength={maxLength}
         />
         {type === "password" && (
           <button
@@ -38,6 +49,13 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
         )}
         {error && <div className="invalid-feedback">{error}</div>}
       </div>
+      {maxLength ? (
+        <label style={{ fontSize: "12px" }}>
+          {textLength.length}/{maxLength} максимальное количество символов
+        </label>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
@@ -50,6 +68,7 @@ TextField.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   error: PropTypes.string,
+  maxLength: PropTypes.number,
   onChange: PropTypes.func
 };
 

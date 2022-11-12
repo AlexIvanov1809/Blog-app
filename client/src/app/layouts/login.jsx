@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import BackButton from "../components/common/backButton";
 import LoginForm from "../components/ui/loginForm";
 import RegisterForm from "../components/ui/registerForm";
 
@@ -17,8 +18,9 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
+      <BackButton to={"/"} />
       <div className="row">
-        <div className="col-md-6 offset-md-3 shadow p-4">
+        <div className="col-md-6 offset-md-3 shadow p-4 bg-white">
           {formType === "register" ? (
             <>
               <h3 className="mb-4">Register</h3>

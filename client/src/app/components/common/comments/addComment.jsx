@@ -43,7 +43,7 @@ const AddComment = ({ onSubmit }) => {
   };
 
   return (
-    <div className="card mb-2">
+    <div className="card mb-2 mt-2">
       <div className="card-body">
         <h2>New comment</h2>
         <form onSubmit={handleSubmit}>

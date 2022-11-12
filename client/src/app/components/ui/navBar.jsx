@@ -8,23 +8,31 @@ const NavBar = () => {
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center bg-light  p-3">
-        <div className=" text-black-50">
+      <div className="d-flex justify-content-between align-items-center bg-black  p-3">
+        <div className=" text-muted">
           <h3>Blog</h3>
         </div>
         <nav className="navbar">
           <div className="container-fluid">
             <ul className="nav">
               <li className="nav-item" style={{ margin: "auto 0" }}>
-                <Link className="nav-link" aria-current="page" to="/">
-                  Main
+                <Link
+                  className="nav-link text-white"
+                  aria-current="page"
+                  to="/"
+                >
+                  Posts
                 </Link>
               </li>
               <li className="nav-item">
                 {isLoggedIn ? (
                   <NavProfile />
                 ) : (
-                  <Link className="nav-link" aria-current="page" to="/login">
+                  <Link
+                    className="nav-link text-white"
+                    aria-current="page"
+                    to="/login"
+                  >
                     Login
                   </Link>
                 )}
