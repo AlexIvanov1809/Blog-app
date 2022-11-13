@@ -16,7 +16,7 @@ const Main = () => {
   const pageSize = 4;
 
   useEffect(() => {
-    setPosts(loadPosts);
+    setPosts(loadPosts || []);
     setLikes(loadLikes);
   }, [loadPosts, loadLikes]);
 
@@ -46,9 +46,9 @@ const Main = () => {
     searchedPosts?.length > 0 ? [...searchedPosts].reverse() : searchedPosts;
   const postCrop = paginate(sortedPostsByNewest, currentPage, pageSize);
   return (
-    <>
+    <div className="wrapper">
       {posts && likes ? (
-        <div className="container">
+        <div className="__container">
           <div className="mt-2">
             <input
               className="form-control m-auto"
@@ -61,7 +61,7 @@ const Main = () => {
             />
           </div>
           <div className="">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-2 justify-content-center">
+            <div className="grid-container">
               {postCrop.map((post) => (
                 <Post
                   key={post._id}
@@ -87,7 +87,7 @@ const Main = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
