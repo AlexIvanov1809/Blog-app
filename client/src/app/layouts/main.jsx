@@ -52,7 +52,7 @@ const Main = () => {
           <div className="mt-2">
             <input
               className="form-control m-auto"
-              style={{ width: "320px" }}
+              style={{ width: "300px" }}
               type="text"
               name="searchQuery"
               placeholder="Search..."
@@ -60,16 +60,15 @@ const Main = () => {
               value={searchQuery}
             />
           </div>
-          <div className="">
-            <div className="grid-container">
-              {postCrop.map((post) => (
-                <Post
-                  key={post._id}
-                  post={post}
-                  like={likes.filter((l) => post._id === l.postId)[0]}
-                />
-              ))}
-            </div>
+          <hr />
+          <div className="grid-container">
+            {postCrop.map((post) => (
+              <Post
+                key={post._id}
+                post={post}
+                like={likes.filter((l) => post._id === l.postId)[0]}
+              />
+            ))}
           </div>
           <div className="d-flex justify-content-center">
             <Pagination

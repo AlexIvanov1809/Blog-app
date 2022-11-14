@@ -13,8 +13,8 @@ const AdminPostItem = ({ post }) => {
   };
   return (
     <div className="d-flex justify-content-between">
-      <h3>{post.title}</h3>
-      <div>
+      <h6>{post.title}</h6>
+      <div className="d-flex align-items-center">
         <Link
           className="btn btn-white"
           to={`/users/${userId}/${post._id}/edit`}

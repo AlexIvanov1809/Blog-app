@@ -36,17 +36,19 @@ const AdminPage = () => {
         </div>
       </div>
       <hr />
-      <div className="d-flex flex-wrap justify-content-center">
-        {posts &&
-          posts.map((item) => (
-            <div
-              className="card m-2 p-2"
-              style={{ width: "300px" }}
-              key={item._id}
-            >
-              <AdminPostItem post={item} />
-            </div>
-          ))}
+      <div className="d-flex justify-content-center">
+        <div className="grid-container">
+          {posts &&
+            posts.map((item) => (
+              <div
+                className="card m-2 p-2"
+                style={{ width: "300px" }}
+                key={item._id}
+              >
+                <AdminPostItem post={item} />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
