@@ -46,9 +46,9 @@ const Main = () => {
     searchedPosts?.length > 0 ? [...searchedPosts].reverse() : searchedPosts;
   const postCrop = paginate(sortedPostsByNewest, currentPage, pageSize);
   return (
-    <div className="wrapper">
+    <>
       {posts && likes ? (
-        <div className="__container">
+        <div className="container">
           <div className="mt-2">
             <input
               className="form-control m-auto"
@@ -61,14 +61,16 @@ const Main = () => {
             />
           </div>
           <hr />
-          <div className="grid-container">
-            {postCrop.map((post) => (
-              <Post
-                key={post._id}
-                post={post}
-                like={likes.filter((l) => post._id === l.postId)[0]}
-              />
-            ))}
+          <div className="d-flex justify-content-center">
+            <div className="grid-container">
+              {postCrop.map((post) => (
+                <Post
+                  key={post._id}
+                  post={post}
+                  like={likes.filter((l) => post._id === l.postId)[0]}
+                />
+              ))}
+            </div>
           </div>
           <div className="d-flex justify-content-center">
             <Pagination
@@ -86,7 +88,7 @@ const Main = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
