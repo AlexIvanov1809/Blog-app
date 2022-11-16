@@ -1,13 +1,12 @@
-const TOKEN_KEY = "jwt-token";
-const REFRESH_KEY = "jwt-refresh-token";
-const EXPIRES_KEY = "jwt-expires";
-const USERID_KEY = "user-local-id";
+const TOKEN_KEY = "blog-token";
+const REFRESH_KEY = "blog-refresh-token";
+const EXPIRES_KEY = "blog-expires";
+const USERID_KEY = "blog-user-local-id";
 
 export function setTokens(
   { refreshToken, accessToken, userId, expiresIn = 3600 },
   stayOn
 ) {
-  console.log(stayOn);
   const expiresDate = new Date().getTime() + expiresIn * 1000;
   if (stayOn) {
     localStorage.setItem(TOKEN_KEY, accessToken);
