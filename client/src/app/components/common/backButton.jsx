@@ -7,15 +7,15 @@ const BackButton = ({ to }) => {
   return (
     <div className=" mt-2 mb-2">
       <button className="btn btn-primary" onClick={() => navigate(to)}>
-        <i className="bi bi-caret-left-fill"></i> Back
+        <i className="bi bi-caret-left-fill"></i> Назад
       </button>
     </div>
   );
 };
 BackButton.defaultProps = {
-  to: "-1"
+  to: -1
 };
 BackButton.propTypes = {
-  to: PropTypes.string
+  to: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 export default BackButton;

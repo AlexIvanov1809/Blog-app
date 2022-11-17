@@ -8,8 +8,8 @@ const NavBar = () => {
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center bg-black  p-3">
-        <div className=" text-muted">
+      <div className="d-flex justify-content-between align-items-center bg-secondary  p-3">
+        <div className=" text-dark">
           <h3>Blog</h3>
         </div>
         <nav className="navbar">
@@ -21,7 +21,7 @@ const NavBar = () => {
                   aria-current="page"
                   to="/"
                 >
-                  Posts
+                  Посты
                 </Link>
               </li>
               <li className="nav-item">
@@ -33,7 +33,7 @@ const NavBar = () => {
                     aria-current="page"
                     to="/login"
                   >
-                    Login
+                    Войти
                   </Link>
                 )}
               </li>

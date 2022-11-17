@@ -55,7 +55,7 @@ const Main = () => {
               style={{ width: "300px" }}
               type="text"
               name="searchQuery"
-              placeholder="Search..."
+              placeholder="Поиск по заголовку..."
               onChange={handleSearchQuery}
               value={searchQuery}
             />

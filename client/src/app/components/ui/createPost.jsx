@@ -67,11 +67,11 @@ const CreatePost = () => {
     <div className="container mt-3">
       <BackButton />
       <div className="card p-3">
-        <label className="fw-bold mb-4">New Post</label>
+        <label className="fw-bold mb-4">Новый пост</label>
         <form onSubmit={handleSubmit}>
           <div className="w-50">
             <TextField
-              label="Title"
+              label="Заголовок"
               type="text"
               name="title"
               value={data.title}
@@ -82,7 +82,7 @@ const CreatePost = () => {
           </div>
           <div className="w-75">
             <TextAreaField
-              label="Short text"
+              label="Описание"
               name="shortText"
               value={data.shortText}
               onChange={handleChange}
@@ -91,7 +91,7 @@ const CreatePost = () => {
             />
           </div>
           <TextAreaField
-            label="full text"
+            label="Полный текст"
             name="fullText"
             value={data.fullText}
             onChange={handleChange}
@@ -100,7 +100,7 @@ const CreatePost = () => {
           />
           <div className="text-end">
             <button className="btn btn-primary" type="submit">
-              Publish
+              Опубликовать
             </button>
           </div>
         </form>

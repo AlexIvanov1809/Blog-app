@@ -23,7 +23,7 @@ const AdminPage = () => {
       <div className="d-flex justify-content-between">
         <div className="w-100 d-flex justify-content-between align-items-center">
           <div>
-            <h3>Posts</h3>
+            <h3>Ваши посты</h3>
           </div>
           <div className="text-end">
             <Link

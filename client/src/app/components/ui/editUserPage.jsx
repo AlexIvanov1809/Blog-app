@@ -29,12 +29,12 @@ const EditUserPage = () => {
 
   const validatorConfig = {
     email: {
-      isRequired: { message: "E-mail is important for feel" },
-      isEmail: { message: "E-mail uncorrect" }
+      isRequired: { message: "Поле обязательно для заполнения" },
+      isEmail: { message: "Неверный e-mail" }
     },
     name: {
-      isRequired: { message: "Name is important for feel" },
-      min: { message: "Name contains min 3 symbols", value: 3 }
+      isRequired: { message: "Поле обязательно для заполнения" },
+      min: { message: "Имя должно содержать минимум 3 символа", value: 3 }
     }
   };
 
@@ -64,8 +64,8 @@ const EditUserPage = () => {
   return (
     <div className="container">
       <BackButton />
-      <div className="card p-2 m-auto mt-4" style={{ width: "320px" }}>
-        <h4>Edit User</h4>
+      <div className="card p-4 m-auto mt-4" style={{ width: "320px" }}>
+        <h4>Редактирование</h4>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Электронная почта"
@@ -86,7 +86,7 @@ const EditUserPage = () => {
             type="submit"
             disabled={!isValid}
           >
-            Edit
+            Изменить
           </button>
         </form>
       </div>

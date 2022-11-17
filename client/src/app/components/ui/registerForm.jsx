@@ -18,28 +18,34 @@ const RegisterForm = () => {
   const [errors, setErrors] = useState({});
   const loginError = useSelector(getAuthError());
 
+  useEffect(() => {
+    setErrors((prevState) => ({ ...prevState, email: loginError?.message }));
+  }, [loginError]);
+
   const handleChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
   const validatorConfig = {
     email: {
-      isRequired: { message: "E-mail is important for feel" },
-      isEmail: { message: "E-mail uncorrect" }
+      isRequired: { message: "Поле обязательно для заполнения" },
+      isEmail: { message: "Неверный e-mail" }
     },
     name: {
-      isRequired: { message: "Name is important for feel" },
-      min: { message: "Name contains min 3 symbols", value: 3 }
+      isRequired: { message: "Поле обязательно для заполнения" },
+      min: { message: "Имя должно содержать минимум 3 символа", value: 3 }
     },
     password: {
-      isRequired: { message: "Password is important for feel" },
-      isCapitalSymbol: { message: "Have no capital letter" },
-      isContainDigit: { message: "Have no digit" },
-      min: { message: "Passwort contains min 8 symbols", value: 8 }
+      isRequired: { message: "Поле обязательно для заполнения" },
+      isCapitalSymbol: {
+        message: "Должна присутствовать одна заглавная буква"
+      },
+      isContainDigit: { message: "Должна присутствовать одна цифра" },
+      min: { message: "Пароль должен содержать минимум 8 символов", value: 8 }
     },
     license: {
       isRequired: {
-        message: "You can't use our service with out comfired license agreement"
+        message: "Ваше согласие обязательно"
       }
     }
   };
@@ -97,17 +103,14 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.license}
       >
-        Confirm <a>licence agreement</a>
+        Подтверждение на обработку персональных данных
       </CheckBoxField>
-      {loginError?.type === "reg" && (
-        <p className="text-danger">{loginError.message}</p>
-      )}
       <button
         className="btn btn-primary w-100 mx-auto"
         type="submit"
         disabled={!isValid}
       >
-        submit
+        Зарегистрироваться
       </button>
     </form>
   );

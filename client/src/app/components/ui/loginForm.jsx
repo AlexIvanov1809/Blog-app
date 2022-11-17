@@ -21,10 +21,10 @@ const LoginForm = () => {
 
   const validatorConfig = {
     email: {
-      isRequired: { message: "E-mail is important for feel" }
+      isRequired: { message: "Поле обязательно для заполнения" }
     },
     password: {
-      isRequired: { message: "Password is important for feel" }
+      isRequired: { message: "Поле обязательно для заполнения" }
     }
   };
 
@@ -68,7 +68,7 @@ const LoginForm = () => {
         error={errors.password}
       />
       <CheckBoxField name="stayOn" value={data.stayOn} onChange={handleChange}>
-        Stay in system
+        Оставаться в системе
       </CheckBoxField>
       {loginError?.type === "login" && (
         <p className="text-danger">{loginError.message}</p>
@@ -78,7 +78,7 @@ const LoginForm = () => {
         type="submit"
         disabled={!isValid}
       >
-        submit
+        Войти
       </button>
     </form>
   );

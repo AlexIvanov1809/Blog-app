@@ -32,10 +32,10 @@ const NavProfile = () => {
       </div>
       <div className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}>
         <Link to={`/users/${currentUser._id}`} className="dropdown-item">
-          Profile
+          Профиль
         </Link>
         <Link to={"logout"} className="dropdown-item">
-          Log out
+          Выйти
         </Link>
       </div>
     </div>
