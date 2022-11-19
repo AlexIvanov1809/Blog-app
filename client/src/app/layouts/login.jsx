@@ -24,9 +24,11 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
-      <BackButton to={"/"} />
-      <div className="row">
-        <div className="col-md-6 offset-md-3 shadow p-4 bg-white">
+      <div className="d-flex flex-column  align-items-center">
+        <div className="w-100 ps-4">
+          <BackButton to={"/"} />
+        </div>
+        <div className="shadow p-4 bg-white" style={{ maxWidth: "400px" }}>
           {formType === "register" ? (
             <>
               <h3 className="mb-4">Регистрация</h3>

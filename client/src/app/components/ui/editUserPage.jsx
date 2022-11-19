@@ -63,7 +63,7 @@ const EditUserPage = () => {
   }
   return (
     <div className="container">
-      <BackButton />
+      <BackButton to={`/users/${currentUserId}`} />
       <div className="card p-4 m-auto mt-4" style={{ width: "320px" }}>
         <h4>Редактирование</h4>
         <form onSubmit={handleSubmit}>

@@ -14,12 +14,17 @@ const EditPost = () => {
   const dispatch = useDispatch();
   const currentPost = useSelector(getCurrentPostData(postId));
   const currentUserId = useSelector(getCurrentUserId());
-  const [data, setData] = useState(currentPost);
+  const [data, setData] = useState();
   const [errors, setErrors] = useState();
   const [showErr, setShowErr] = useState({});
   const handleChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
+  useEffect(() => {
+    if (currentPost) {
+      setData(currentPost);
+    }
+  }, []);
   const validatorConfig = {
     title: {
       isRequired: { message: "Поле обязательно для заполнения" }
@@ -52,49 +57,51 @@ const EditPost = () => {
     if (!isValid) return setShowErr(errors);
     dispatch(editPost(data, back));
   };
-  if (currentPost.userId !== currentUserId) {
+  if (currentPost && currentPost.userId !== currentUserId) {
     return <Navigate to={`/users/${currentUserId}`} />;
   }
   return (
     <div className="container mt-3">
-      <BackButton />
+      <BackButton to={`/users/${currentUserId}`} />
       <div className="card p-3">
         <label className="fw-bold mb-4">Редактирование поста</label>
-        <form onSubmit={handleSubmit}>
-          <div className="w-50">
-            <TextField
-              label="Заголовок"
-              type="text"
-              name="title"
-              value={data.title}
-              onChange={handleChange}
-              maxLength={60}
-              error={showErr.title}
-            />
-          </div>
-          <div className="w-75">
+        {data && (
+          <form onSubmit={handleSubmit}>
+            <div className="w-50">
+              <TextField
+                label="Заголовок"
+                type="text"
+                name="title"
+                value={data.title}
+                onChange={handleChange}
+                maxLength={60}
+                error={showErr.title}
+              />
+            </div>
+            <div className="w-75">
+              <TextAreaField
+                label="Описание"
+                name="shortText"
+                value={data.shortText}
+                onChange={handleChange}
+                maxLength={150}
+                error={showErr.shortText}
+              />
+            </div>
             <TextAreaField
-              label="Описание"
-              name="shortText"
-              value={data.shortText}
+              label="Полный текст"
+              name="fullText"
+              value={data.fullText}
               onChange={handleChange}
-              maxLength={150}
-              error={showErr.shortText}
+              rows="5"
             />
-          </div>
-          <TextAreaField
-            label="Полный текст"
-            name="fullText"
-            value={data.fullText}
-            onChange={handleChange}
-            rows="5"
-          />
-          <div className="text-end">
-            <button className="btn btn-primary" type="submit">
-              Изменить
-            </button>
-          </div>
-        </form>
+            <div className="text-end">
+              <button className="btn btn-primary" type="submit">
+                Изменить
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

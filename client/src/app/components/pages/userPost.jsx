@@ -20,7 +20,7 @@ const UserPost = () => {
   const currentUserId = useSelector(getCurrentUserId());
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
   const isLoading = useSelector(getPostsLoadingStatus());
-  const postMaker = useSelector(getUsersByIds(post.userId));
+  const postMaker = useSelector(getUsersByIds(post?.userId));
 
   const [date, setDate] = useState();
   useEffect(() => {
@@ -36,7 +36,7 @@ const UserPost = () => {
   };
   return (
     <div className="container">
-      <BackButton />
+      <BackButton to={"/"} />
       {post && (
         <div className="card">
           <div className="card-body">

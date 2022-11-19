@@ -18,7 +18,7 @@ const AdminPage = () => {
   }, [loadPosts]);
   return (
     <div className="container mt-3">
-      <BackButton />
+      <BackButton to={"/"} />
       <UserBio id={_id} name={name} image={image} />
       <div className="d-flex justify-content-between">
         <div className="w-100 d-flex justify-content-between align-items-center">
