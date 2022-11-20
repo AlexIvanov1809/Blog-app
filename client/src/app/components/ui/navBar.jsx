@@ -17,7 +17,7 @@ const NavBar = () => {
             <ul className="nav">
               <li className="nav-item" style={{ margin: "auto 0" }}>
                 <Link
-                  className="nav-link text-white"
+                  className="nav-link text-white mob"
                   aria-current="page"
                   to="/"
                 >

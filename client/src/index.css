@@ -39,4 +39,25 @@ code {
 	.grid-container {
 		grid-template-columns: repeat(1, 1fr);
 	}
+	.mob {
+		visibility: hidden;
+		width: 60px;
+	}
+	.mobmax {
+		display: block;
+		color: #000;
+		text-decoration: none;
+		padding: 4px 0 4px 1rem;
+	}
+	.mobmax:hover {
+		background-color: rgb(230, 230, 230);
+		color: #000;
+		text-decoration: none;
+	}
+}
+@media (min-width: 771px) {
+	.mobmax {
+		visibility: hidden;
+		display: none;
+	}
 }

@@ -21,7 +21,7 @@ const NavProfile = () => {
   return (
     <div className="dropdown" onClick={toggleMenu}>
       <div className="btn dropdown-toggle d-flex align-items-center text-white">
-        <div className="me-2 ">{currentUser.name}</div>
+        <div className="me-2 mob">{currentUser.name}</div>
         <img
           src={currentUser.image}
           alt=""
@@ -31,6 +31,9 @@ const NavProfile = () => {
         />
       </div>
       <div className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}>
+        <Link to="/" className="mobmax">
+          Посты
+        </Link>
         <Link to={`/users/${currentUser._id}`} className="dropdown-item">
           Профиль
         </Link>
