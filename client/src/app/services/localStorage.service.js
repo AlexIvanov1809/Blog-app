@@ -57,6 +57,10 @@ export function removeAuthData() {
   localStorage.removeItem(USERID_KEY);
   localStorage.removeItem(REFRESH_KEY);
   localStorage.removeItem(EXPIRES_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(USERID_KEY);
+  sessionStorage.removeItem(REFRESH_KEY);
+  sessionStorage.removeItem(EXPIRES_KEY);
 }
 
 const localStorageSevice = {
