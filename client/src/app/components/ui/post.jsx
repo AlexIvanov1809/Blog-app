@@ -18,17 +18,13 @@ const Post = ({ post, like }) => {
   const currentUserId = useSelector(getCurrentUserId());
   const postMaker = useSelector(getUsersByIds(post.userId));
   const name = postMaker.name.split(" ")[0];
-  let likes;
+
   const handleClick = () => {
-    if (!likes) {
-      navigate(`/posts/${post._id}`);
-    } else {
-      likes = false;
-    }
+    navigate(`/posts/${post._id}`);
   };
 
-  const handleChange = () => {
-    likes = true;
+  const handleChange = (e) => {
+    e.stopPropagation();
     if (isLoggedIn) {
       dispatch(editLike(like._id, { userId: currentUserId }));
     }
