@@ -48,6 +48,7 @@ const LoginForm = () => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
+    data.email = data.email.toLowerCase();
     dispatch(signIn(data, back, redirect));
   };
   return (
