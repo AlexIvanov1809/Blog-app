@@ -1,4 +1,4 @@
-Использовались фреймворки, библиотеки и БД:\
+### Использовались фреймворки, библиотеки и БД:\
 Frontend: React 18, Redux Toolkit, Bootstrap, Axios\
 Backend: Node.js, Express.js, Mongoose, MongoDB\
 
