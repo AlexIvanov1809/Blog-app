@@ -17,5 +17,5 @@ Backend: Node.js, Express.js, Mongoose, MongoDB
 
 Чтобы запустить приложение нужно настроить /server/config/default.json - прописать connection string MongoDB Atlas
 
-/clent запустить команду npm start
+/clent запустить команду npm start\
 /server запустить команду npm run dev
