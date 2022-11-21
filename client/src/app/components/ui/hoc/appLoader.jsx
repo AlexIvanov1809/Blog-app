@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  getAuthError,
   getUsersIsLoggeedIn,
   getUsersLoadingStatus,
   loadUsersList
@@ -8,17 +9,25 @@ import {
 import PropTypes from "prop-types";
 import { loadPostsList } from "../../../store/posts";
 import { loadLikesList } from "../../../store/likes";
+import localStorageSevice from "../../../services/localStorage.service";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const usersStatusLoading = useSelector(getUsersLoadingStatus());
   const isLoggedIn = useSelector(getUsersIsLoggeedIn());
+  const authError = useSelector(getAuthError());
 
   useEffect(() => {
     dispatch(loadLikesList());
     dispatch(loadPostsList());
     dispatch(loadUsersList());
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (authError) {
+      localStorageSevice.removeAuthData();
+    }
+  }, [authError]);
 
   if (usersStatusLoading) {
     return (

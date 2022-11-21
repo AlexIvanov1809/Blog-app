@@ -2,13 +2,18 @@ const TOKEN_KEY = "blog-token";
 const REFRESH_KEY = "blog-refresh-token";
 const EXPIRES_KEY = "blog-expires";
 const USERID_KEY = "blog-user-local-id";
+const STAY_ON = "stayOn";
 
-export function setTokens(
-  { refreshToken, accessToken, userId, expiresIn = 3600 },
-  stayOn
-) {
+export function setTokens({
+  refreshToken,
+  accessToken,
+  userId,
+  expiresIn = 3600
+}) {
   const expiresDate = new Date().getTime() + expiresIn * 1000;
+  const stayOn = localStorage.getItem(STAY_ON);
   if (stayOn) {
+    console.log(refreshToken);
     localStorage.setItem(TOKEN_KEY, accessToken);
     localStorage.setItem(USERID_KEY, userId);
     localStorage.setItem(REFRESH_KEY, refreshToken);
@@ -21,15 +26,18 @@ export function setTokens(
   }
 }
 export function getAccessToken() {
-  const checker = localStorage.getItem(TOKEN_KEY);
+  const checker = localStorage.getItem(STAY_ON);
   if (checker) {
     return localStorage.getItem(TOKEN_KEY);
   } else {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 }
+export function setStaingOn(data) {
+  localStorage.setItem(STAY_ON, !data ? "" : data);
+}
 export function getRefreshToken() {
-  const checker = localStorage.getItem(REFRESH_KEY);
+  const checker = localStorage.getItem(STAY_ON);
   if (checker) {
     return localStorage.getItem(REFRESH_KEY);
   } else {
@@ -37,7 +45,7 @@ export function getRefreshToken() {
   }
 }
 export function getExpiresDate() {
-  const checker = localStorage.getItem(EXPIRES_KEY);
+  const checker = localStorage.getItem(STAY_ON);
   if (checker) {
     return localStorage.getItem(EXPIRES_KEY);
   } else {
@@ -45,7 +53,7 @@ export function getExpiresDate() {
   }
 }
 export function getUserID() {
-  const checker = localStorage.getItem(USERID_KEY);
+  const checker = localStorage.getItem(STAY_ON);
   if (checker) {
     return localStorage.getItem(USERID_KEY);
   } else {
@@ -57,6 +65,7 @@ export function removeAuthData() {
   localStorage.removeItem(USERID_KEY);
   localStorage.removeItem(REFRESH_KEY);
   localStorage.removeItem(EXPIRES_KEY);
+  localStorage.removeItem(STAY_ON);
   sessionStorage.removeItem(TOKEN_KEY);
   sessionStorage.removeItem(USERID_KEY);
   sessionStorage.removeItem(REFRESH_KEY);
@@ -69,7 +78,8 @@ const localStorageSevice = {
   getRefreshToken,
   getExpiresDate,
   getUserID,
-  removeAuthData
+  removeAuthData,
+  setStaingOn
 };
 
 export default localStorageSevice;

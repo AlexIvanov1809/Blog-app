@@ -94,7 +94,8 @@ export const signIn = (payload, navigate, redirect) => async (dispatch) => {
   try {
     const data = await authService.login({ email, password });
     dispatch(authRequestSuccess({ userId: data.userId }));
-    localStorageSevice.setTokens(data, stayOn);
+    localStorageSevice.setStaingOn(stayOn);
+    localStorageSevice.setTokens(data);
     navigate(redirect);
   } catch (error) {
     const { code, message } = error.response.data.error;
@@ -111,7 +112,8 @@ export const signUp = (payload, navigate) => async (dispatch) => {
   dispatch(authRequested());
   try {
     const data = await authService.register(payload);
-    localStorageSevice.setTokens(data, true);
+    localStorageSevice.setStaingOn(true);
+    localStorageSevice.setTokens(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
     navigate();
   } catch (error) {
