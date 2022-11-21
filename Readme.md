@@ -2,7 +2,7 @@
 Frontend: React 18, Redux Toolkit, Bootstrap, Axios\
 Backend: Node.js, Express.js, Mongoose, MongoDB\
 
-###Функционал приложения:
+### Функционал приложения:
 
 1. Пользовательский интерфейс\
    1.1. Логирование и регистрация пользователей\
