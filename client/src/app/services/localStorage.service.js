@@ -13,7 +13,6 @@ export function setTokens({
   const expiresDate = new Date().getTime() + expiresIn * 1000;
   const stayOn = localStorage.getItem(STAY_ON);
   if (stayOn) {
-    console.log(refreshToken);
     localStorage.setItem(TOKEN_KEY, accessToken);
     localStorage.setItem(USERID_KEY, userId);
     localStorage.setItem(REFRESH_KEY, refreshToken);
